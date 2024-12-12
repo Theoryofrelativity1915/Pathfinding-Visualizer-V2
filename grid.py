@@ -29,11 +29,18 @@ class Grid:
         # fill the screen with a color to wipe away anything from last frame
         self.canvas.fill("WHITE")
         # flip() the display to put your work on screen
-        self.draw_cells()
+        self.draw_grid_lines()
+        self.render_cells()
         py.display.flip()
 
-    def draw_cells(self):
+    def draw_grid_lines(self):
         for row in range(self.rows):
             for col in range(self.cols):
                 py.draw.line(self.canvas, BLACK,(0, row * SQUARE_SIZE), (SCREEN_SIZE, row * SQUARE_SIZE))
                 py.draw.line(self.canvas, BLUE,(col * SQUARE_SIZE, 0), (col * SQUARE_SIZE,SCREEN_SIZE))
+
+    def render_cells(self):
+        for row in range(self.rows):
+            for col in range(self.cols):
+                cell = self.grid[row][col]
+                cell.render(self.canvas)

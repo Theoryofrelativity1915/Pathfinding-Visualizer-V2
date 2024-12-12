@@ -1,17 +1,19 @@
 import pygame as py
-from constants import COLS, ROWS, SQUARE_SIZE, BLACK 
+from constants import COLS, ROWS, SQUARE_SIZE, BLACK, RED, WHITE
 
 class Cell:
     def __init__(self, row, col):
         self.row = row
         self.col = col
         self.pos = (row * SQUARE_SIZE, col * SQUARE_SIZE)
+        self.visited = False
+        self.offset = 4
         self.neighbor_positions = []
 
     def render(self, canvas):
-        py.draw.rect(canvas, BLACK, (self.col * SQUARE_SIZE,
-                                                  self.row * SQUARE_SIZE, SQUARE_SIZE,
-                                                  SQUARE_SIZE))
+        py.draw.rect(canvas, RED, ((self.col * SQUARE_SIZE) + self.offset,
+                                                  (self.row * SQUARE_SIZE + self.offset), SQUARE_SIZE - self.offset * 2,
+                                                  SQUARE_SIZE - self.offset * 2))
 
     def init_adjacency_list(self, grid):
         up, down, left, right = None, None, None, None
