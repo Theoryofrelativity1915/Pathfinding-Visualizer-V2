@@ -7,16 +7,23 @@ class Grid:
         self.rows = rows
         self.cols = cols
         self.grid = self.init_grid_and_cells()
+        self.init_cells_adjacency_list()
 
     def init_grid_and_cells(self):
-        board = []
+        grid = []
         for r in range(self.rows):
             row = []
             for col in range(self.cols):
                 cell = Cell(r, col)
                 row.append(cell)
-            board.append(row)
-        return board
+            grid.append(row)
+        return grid
+
+    def init_cells_adjacency_list(self):
+        for row in range(self.rows):
+            for col in range(self.cols):
+                cell = self.grid[row][col]
+                cell.init_adjacency_list(self.grid)
 
     def render(self):
         # fill the screen with a color to wipe away anything from last frame
