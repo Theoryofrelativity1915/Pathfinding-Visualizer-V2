@@ -14,7 +14,7 @@ class Grid:
         for r in range(self.rows):
             row = []
             for col in range(self.cols):
-                cell = Cell(r, col)
+                cell = Cell(r, col, self.canvas)
                 row.append(cell)
             grid.append(row)
         return grid
@@ -43,4 +43,4 @@ class Grid:
         for row in range(self.rows):
             for col in range(self.cols):
                 cell = self.grid[row][col]
-                cell.render(self.canvas)
+                cell.render()

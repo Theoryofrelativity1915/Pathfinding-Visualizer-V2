@@ -2,16 +2,18 @@ import pygame as py
 from constants import COLS, ROWS, SQUARE_SIZE, BLACK, RED, WHITE
 
 class Cell:
-    def __init__(self, row, col):
+    def __init__(self, row, col, canvas):
         self.row = row
         self.col = col
         self.pos = (row * SQUARE_SIZE, col * SQUARE_SIZE)
         self.visited = False
         self.offset = 4
-        self.neighbor_positions = []
+        self.canvas = canvas
+        self.neighbors = []
 
-    def render(self, canvas):
-        py.draw.rect(canvas, RED, ((self.col * SQUARE_SIZE) + self.offset,
+    def render(self):
+        self.color = self.get_color()
+        py.draw.rect(self.canvas, self.color, ((self.col * SQUARE_SIZE) + self.offset,
                                                   (self.row * SQUARE_SIZE + self.offset), SQUARE_SIZE - self.offset * 2,
                                                   SQUARE_SIZE - self.offset * 2))
 
@@ -29,3 +31,8 @@ class Cell:
         if self.col + 1 != COLS:
             right = grid[self.row][self.col + 1]
         return [up, down, left, right]
+
+    def get_color(self):
+        if self.visited:
+            return RED
+        return WHITE
